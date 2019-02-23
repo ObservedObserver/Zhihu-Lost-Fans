@@ -2,7 +2,10 @@ from request import getData
 import time, json, os
 if __name__ == '__main__':
   t = time.strftime("%Y-%m-%d_%H:%M:%S", time.localtime())
-  data = getData()
+  url_token = ''
+  with open('./config/userinfo.json', 'r') as f:
+    url_token = json.loads(f.read())['user_url_token']
+  data = getData(url_token)
   filepath = './data/[fans-data]' + t + '.json'
   with open(filepath, 'w+') as f:
     f.write(json.dumps(data))
